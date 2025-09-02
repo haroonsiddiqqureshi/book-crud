@@ -29,13 +29,20 @@ const Signup = () => {
   };
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={[styles.title, { color: colors.primary }]}>REGISTRATION</Text>
+        <Text style={[styles.title, { color: colors.primary }]}>
+          REGISTRATION
+        </Text>
         <TextInput
-          style={[styles.input, { borderColor: colors.primary, backgroundColor: colors.border, color: colors.secondary }]}
+          style={[
+            styles.input,
+            {
+              borderColor: colors.primary,
+              backgroundColor: colors.border,
+              color: colors.secondary,
+            },
+          ]}
           value={email}
           onChangeText={setEmail}
           placeholder="Email"
@@ -44,7 +51,14 @@ const Signup = () => {
           placeholderTextColor={colors.secondary + "80"}
         />
         <TextInput
-          style={[styles.input, { borderColor: colors.primary, backgroundColor: colors.border, color: colors.secondary }]}
+          style={[
+            styles.input,
+            {
+              borderColor: colors.primary,
+              backgroundColor: colors.border,
+              color: colors.secondary,
+            },
+          ]}
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
@@ -52,22 +66,29 @@ const Signup = () => {
           placeholderTextColor={colors.secondary + "80"}
         />
         <TextInput
-          style={[styles.input, { borderColor: colors.primary, backgroundColor: colors.border, color: colors.secondary }]}
+          style={[
+            styles.input,
+            {
+              borderColor: colors.primary,
+              backgroundColor: colors.border,
+              color: colors.secondary,
+            },
+          ]}
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           secureTextEntry={true}
           placeholder="Confirm Password"
           placeholderTextColor={colors.secondary + "80"}
         />
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Sign up"
-            onPress={handleSignup}
-            color={colors.primary}
-          />
+        <View
+          style={[styles.buttonContainer, { backgroundColor: colors.primary }]}
+        >
+          <TouchableOpacity onPress={handleSignup}>
+            <Text style={styles.label}>Sign Up</Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity onPress={handleSigninLink} style={styles.signinLink}>
-          <Text style={{ color: colors.primary, marginTop: 16 }}>
+          <Text style={{ color: colors.primary }}>
             Already have an account? Sign in
           </Text>
         </TouchableOpacity>
@@ -101,9 +122,15 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    marginTop: 8,
+    height: 36,
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 8,
-    overflow: "hidden",
+  },
+  label: {
+    fontSize: 16,
+    color: "#fff",
+    fontWeight: "bold",
   },
   signinLink: {
     alignItems: "center",

@@ -28,13 +28,20 @@ const SignIn = () => {
   };
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={[styles.title, { color: colors.primary }]}>AUTHENTICATION</Text>
+        <Text style={[styles.title, { color: colors.primary }]}>
+          AUTHENTICATION
+        </Text>
         <TextInput
-          style={[styles.input, { borderColor: colors.primary, backgroundColor: colors.border, color: colors.secondary }]}
+          style={[
+            styles.input,
+            {
+              borderColor: colors.primary,
+              backgroundColor: colors.border,
+              color: colors.secondary,
+            },
+          ]}
           value={email}
           onChangeText={setEmail}
           placeholder="Email"
@@ -43,22 +50,29 @@ const SignIn = () => {
           placeholderTextColor={colors.secondary + "80"}
         />
         <TextInput
-          style={[styles.input, { borderColor: colors.primary, backgroundColor: colors.border, color: colors.secondary }]}
+          style={[
+            styles.input,
+            {
+              borderColor: colors.primary,
+              backgroundColor: colors.border,
+              color: colors.secondary,
+            },
+          ]}
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
           placeholder="Password"
           placeholderTextColor={colors.secondary + "80"}
         />
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Sign in"
-            onPress={handleSignin}
-            color={colors.primary}
-          />
+        <View
+          style={[styles.buttonContainer, { backgroundColor: colors.primary }]}
+        >
+          <TouchableOpacity onPress={handleSignin}>
+            <Text style={styles.label}>Sign In</Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity onPress={handleSignupLink} style={styles.signupLink}>
-          <Text style={{ color: colors.primary, marginTop: 16 }}>
+          <Text style={{ color: colors.primary }}>
             Don't have an account? Sign up
           </Text>
         </TouchableOpacity>
@@ -92,9 +106,15 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    marginTop: 8,
+    height: 36,
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 8,
-    overflow: "hidden",
+  },
+  label: {
+    fontSize: 16,
+    color: "#fff",
+    fontWeight: "bold",
   },
   signupLink: {
     marginTop: 16,

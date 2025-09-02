@@ -164,7 +164,7 @@ const Home = () => {
         >
           <TouchableOpacity
             onPress={() => {
-              router.push("/book");
+              router.push("./book/book");
             }}
           >
             <Text style={[styles.label, { fontWeight: "bold", color: "#fff" }]}>
