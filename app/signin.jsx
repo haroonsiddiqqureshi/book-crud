@@ -1,7 +1,21 @@
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { useTheme } from "./context/ThemeContext";
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 
-const Signin = () => {
+const SignIn = () => {
+  const { colors } = useTheme();
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -9,39 +23,80 @@ const Signin = () => {
     // handle sign in logic here
   };
 
+  const handleSignupLink = () => {
+    router.push("/signup");
+  };
+
   return (
-    <View style={style.container}>
-      <TextInput
-        value={email}
-        onChangeText={setEmail}
-        placeholder="email@email.com"
-        keyboardType="email-address"
-      />
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true} // hides the password input
-        placeholder="Password"
-      />
-      <Button title="Signin" onPress={handleSignin} />
+    <View
+      style={[styles.container, { backgroundColor: colors.background }]}
+    >
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={[styles.title, { color: colors.primary }]}>AUTHENTICATION</Text>
+        <TextInput
+          style={[styles.input, { borderColor: colors.primary, backgroundColor: colors.border, color: colors.secondary }]}
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          placeholderTextColor={colors.secondary + "80"}
+        />
+        <TextInput
+          style={[styles.input, { borderColor: colors.primary, backgroundColor: colors.border, color: colors.secondary }]}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={true}
+          placeholder="Password"
+          placeholderTextColor={colors.secondary + "80"}
+        />
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Sign in"
+            onPress={handleSignin}
+            color={colors.primary}
+          />
+        </View>
+        <TouchableOpacity onPress={handleSignupLink} style={styles.signupLink}>
+          <Text style={{ color: colors.primary, marginTop: 16 }}>
+            Don't have an account? Sign up
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
-export default Signin;
 
-const style = StyleSheet.create({
+export default SignIn;
+
+const styles = StyleSheet.create({
   container: {
-    marginVertical: 14,
-    marginHorizontal: 20,
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 12,
   },
   title: {
-    fontSize: 34,
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 32,
   },
-  text: {},
-  profile: {
-    height: 128,
-    width: 128,
-    borderRadius: 50,
+  input: {
+    width: "100%",
+    height: 48,
+    borderWidth: 2,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    marginBottom: 20,
+    fontSize: 16,
+  },
+  buttonContainer: {
+    width: "100%",
+    marginTop: 8,
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+  signupLink: {
+    marginTop: 16,
   },
 });

@@ -44,7 +44,11 @@ function StackLayout() {
         />
         <Stack.Screen
           name="signin"
-          options={{ title: "Sign In", headerRight: () => <ThemeToggle /> }}
+          options={{ title: "", headerRight: () => <ThemeToggle /> }}
+        />
+        <Stack.Screen
+          name="signup"
+          options={{ title: "", headerRight: () => <ThemeToggle /> }}
         />
       </Stack>
     </>
