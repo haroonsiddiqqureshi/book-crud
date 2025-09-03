@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { useTheme } from "./context/ThemeContext";
 import { FontAwesome } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const About = () => {
   const { colors } = useTheme();

@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useBooks } from "../context/BookContext";
+import { useTheme } from "../context/ThemeContext";
 
 export default function BookDetailPage() {
   const router = useRouter();
+  const { colors } = useTheme();
   const { id } = useLocalSearchParams();
   const { books, deleteBook, updateBook } = useBooks();
   const book = books.find((b) => b.id === Number(id));
@@ -21,7 +30,10 @@ export default function BookDetailPage() {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Book not found.</Text>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.push("/book/book")}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
           <Text style={styles.buttonText}>Back to List</Text>
         </TouchableOpacity>
       </View>
@@ -34,84 +46,131 @@ export default function BookDetailPage() {
   };
 
   const handleDelete = () => {
-    Alert.alert(
-      "Delete Book",
-      "Are you sure you want to delete this book?",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            deleteBook(book.id);
-            router.push("/book/book");
-          },
+    Alert.alert("Delete Book", "Are you sure you want to delete this book?", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => {
+          deleteBook(book.id);
+          router.back();
         },
-      ]
-    );
+      },
+    ]);
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Book Details</Text>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {isEditing ? (
         <View style={styles.form}>
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              {
+                borderColor: colors.border,
+                color: colors.secondary,
+                backgroundColor: colors.surface,
+              },
+            ]}
             value={form.title}
             placeholder="Title"
             onChangeText={(text) => setForm({ ...form, title: text })}
           />
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              {
+                borderColor: colors.border,
+                color: colors.secondary,
+                backgroundColor: colors.surface,
+              },
+            ]}
             value={form.author}
             placeholder="Author"
             onChangeText={(text) => setForm({ ...form, author: text })}
           />
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              {
+                borderColor: colors.border,
+                color: colors.secondary,
+                backgroundColor: colors.surface,
+              },
+            ]}
             value={form.description}
             placeholder="Description"
             onChangeText={(text) => setForm({ ...form, description: text })}
           />
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              {
+                borderColor: colors.border,
+                color: colors.secondary,
+                backgroundColor: colors.surface,
+              },
+            ]}
             value={form.genre}
             placeholder="Genre"
             onChangeText={(text) => setForm({ ...form, genre: text })}
           />
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              {
+                borderColor: colors.border,
+                color: colors.secondary,
+                backgroundColor: colors.surface,
+              },
+            ]}
             value={form.year}
             placeholder="Year"
             keyboardType="numeric"
             onChangeText={(text) => setForm({ ...form, year: text })}
           />
-          <TouchableOpacity style={styles.saveButton} onPress={handleUpdate}>
+          <TouchableOpacity
+            style={[styles.saveButton, { backgroundColor: colors.primary }]}
+            onPress={handleUpdate}
+          >
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.cancelButton} onPress={() => setIsEditing(false)}>
-            <Text style={styles.buttonText}>Cancel</Text>
+          <TouchableOpacity
+            style={[styles.cancelButton, { backgroundColor: colors.surface }]}
+            onPress={() => setIsEditing(false)}
+          >
+            <Text style={[styles.buttonText, { color: colors.secondary }]}>
+              Cancel
+            </Text>
           </TouchableOpacity>
         </View>
       ) : (
         <View>
-          <Text style={styles.detailText}>
-            <Text style={styles.bold}>Title:</Text> {book.title}
+          <Text style={[styles.header, { color: colors.secondary }]}>
+            {book.title}
           </Text>
-          <Text style={styles.detailText}>
+
+          <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
+          <Text style={[styles.detailText, { color: colors.secondary }]}>
             <Text style={styles.bold}>Author:</Text> {book.author}
           </Text>
-          <Text style={styles.detailText}>
+          <Text style={[styles.detailText, { color: colors.secondary }]}>
             <Text style={styles.bold}>Description:</Text> {book.description}
           </Text>
-          <Text style={styles.detailText}>
+          <Text style={[styles.detailText, { color: colors.secondary }]}>
             <Text style={styles.bold}>Genre:</Text> {book.genre}
           </Text>
-          <Text style={styles.detailText}>
+          <Text style={[styles.detailText, { color: colors.secondary }]}>
             <Text style={styles.bold}>Year:</Text> {book.year}
           </Text>
-          <TouchableOpacity style={styles.editButton} onPress={() => setIsEditing(true)}>
+
+          <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
+          <TouchableOpacity
+            style={[styles.editButton, { backgroundColor: colors.primary }]}
+            onPress={() => setIsEditing(true)}
+          >
             <Text style={styles.buttonText}>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
@@ -125,16 +184,16 @@ export default function BookDetailPage() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
-    maxWidth: 480,
-    alignSelf: "center",
-    flex: 1,
-    backgroundColor: "#fff",
+    flexGrow: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    height: "auto",
+    alignItems: "center",
   },
   header: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 16,
+    marginBottom: 8,
   },
   form: {
     flexDirection: "column",
@@ -142,7 +201,6 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#d1d5db",
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 8,
@@ -153,39 +211,37 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 8,
   },
+  divider: {
+    height: 2,
+    marginVertical: 10,
+  },
   bold: {
     fontWeight: "bold",
   },
   editButton: {
-    backgroundColor: "#22c55e",
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: 10,
   },
   deleteButton: {
     backgroundColor: "#ef4444",
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: "center",
-    marginBottom: 8,
   },
   saveButton: {
-    backgroundColor: "#22c55e",
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: "center",
     marginBottom: 8,
   },
   cancelButton: {
-    backgroundColor: "#6b7280",
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: "center",
-    marginBottom: 8,
   },
   backButton: {
-    backgroundColor: "#2563eb",
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: "center",

@@ -78,7 +78,8 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
+    justifyContent: "center",
     paddingVertical: 20,
     paddingHorizontal: 20,
     alignItems: "center",
@@ -101,11 +102,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   label: {
-    fontSize: 16,
+    fontSize: 18,
   },
   buttonContainer: {
-    width: "80%",
-    height: 30,
+    width: "60%",
+    height: 60,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 8,

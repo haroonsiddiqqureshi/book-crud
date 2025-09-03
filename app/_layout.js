@@ -3,7 +3,7 @@ import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import ThemeToggle from "./components/ThemeToggle";
 import SignIn from "./context/SignIn";
 import { StatusBar } from "expo-status-bar";
-import { BookProvider } from "./context/BookContext"; // เพิ่มบรรทัดนี้
+import { BookProvider } from "./context/BookContext";
 
 function StackLayout() {
   const { isDarkMode, toggleTheme, colors } = useTheme();

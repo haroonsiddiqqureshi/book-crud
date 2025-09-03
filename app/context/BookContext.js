@@ -5,19 +5,19 @@ const BookContext = createContext();
 const initialBooks = [
   {
     id: 1,
-    title: "React Basics",
-    author: "Dan Abramov",
-    description: "A beginner's guide to React.",
-    genre: "Programming",
-    year: 2020,
+    title: "Starting with Business",
+    author: "Ken Colwell",
+    description: "A simple and practical guide to building a business",
+    genre: "Business",
+    year: 2019,
   },
   {
     id: 2,
-    title: "JavaScript Guide",
-    author: "Brendan Eich",
-    description: "Comprehensive JavaScript reference.",
-    genre: "Programming",
-    year: 2018,
+    title: "The Dark Psychology",
+    author: "DR.Hiro",
+    description: "When your words can control people's minds",
+    genre: "Self-Improvement",
+    year: 2023,
   },
 ];
 
