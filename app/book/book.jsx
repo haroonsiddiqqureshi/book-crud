@@ -1,61 +1,72 @@
 import React from "react";
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { useBooks } from "../context/BookContext";
+import { useTheme } from "../context/ThemeContext";
 
 export default function BookListPage() {
   const { books } = useBooks();
+  const { colors } = useTheme();
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Book List</Text>
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => router.push("/book/create")}
+    <View style={{ flex: 1, backgroundColor: colors.border }}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          { backgroundColor: colors.background },
+        ]}
       >
-        <Text style={styles.addButtonText}>+ Add New Book</Text>
-      </TouchableOpacity>
-      <FlatList
-        data={books}
-        keyExtractor={(book) => book.id.toString()}
-        renderItem={({ item: book }) => (
-          <TouchableOpacity
-            style={styles.listItem}
-            onPress={() => router.push(`/book/${book.id}`)}
-          >
-            <Text>
-              <Text style={styles.bookTitle}>{book.title}</Text>
-              <Text style={styles.bookAuthor}> by {book.author}</Text>
-            </Text>
-          </TouchableOpacity>
-        )}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-      />
+        <TouchableOpacity
+          style={[styles.addButton, { backgroundColor: colors.primary }]}
+          onPress={() => router.push("/book/create")}
+        >
+          <Text style={styles.addButtonText}>+ Add New Book</Text>
+        </TouchableOpacity>
+        <FlatList
+          data={books}
+          keyExtractor={(book) => book.id.toString()}
+          renderItem={({ item: book }) => (
+            <TouchableOpacity
+              style={styles.listItem}
+              onPress={() => router.push(`/book/${book.id}`)}
+            >
+              <Text>
+                <Text style={[styles.bookTitle, {color: colors.secondary} ]}>{book.title}</Text>
+                <Text style={[styles.bookAuthor, {color: colors.secondary} ]}> by {book.author}</Text>
+              </Text>
+            </TouchableOpacity>
+          )}
+          ItemSeparatorComponent={() => (
+            <View style={{ backgroundColor: colors.secondary, height: 1, opacity: 0.1, }} />
+          )}
+        />
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
-    maxWidth: 480,
-    alignSelf: "center",
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
+    flexGrow: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    height: "auto",
   },
   addButton: {
-    marginBottom: 16,
+    marginBottom: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: "#2563eb",
     borderRadius: 8,
-    alignSelf: "flex-start",
+    alignSelf: "flex-center",
   },
   addButtonText: {
     color: "#fff",
@@ -73,11 +84,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   bookAuthor: {
-    color: "#6b7280",
     fontSize: 16,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: "#e5e7eb",
+    opacity: 0.4,
   },
 });

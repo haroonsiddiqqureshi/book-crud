@@ -11,7 +11,6 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { useTheme } from "./context/ThemeContext";
 import { useRouter } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
   const { colors } = useTheme();
@@ -25,125 +24,24 @@ const Home = () => {
           { backgroundColor: colors.background },
         ]}
       >
-        <Image
-          source={require("../assets/images/myself.jpg")}
-          style={[styles.image, { borderColor: colors.primary }]}
-        />
-
-        <View style={[styles.divider, { backgroundColor: colors.primary }]} />
-
-        <View style={styles.field}>
-          <Text
-            style={[
-              styles.label,
-              { fontWeight: "bold", color: colors.primary },
-            ]}
-          >
-            NAME
-          </Text>
-          <Text style={[styles.label, { color: colors.secondary }]}>
-            Haroon Siddiq Qureshi
-          </Text>
-        </View>
-
-        <View style={styles.field}>
-          <Text
-            style={[
-              styles.label,
-              { fontWeight: "bold", color: colors.primary },
-            ]}
-          >
-            ID
-          </Text>
-          <Text style={[styles.label, { color: colors.secondary }]}>
-            653450300-1
-          </Text>
-        </View>
-
-        <View style={styles.field}>
-          <Text
-            style={[
-              styles.label,
-              { fontWeight: "bold", color: colors.primary },
-            ]}
-          >
-            MAJOR
-          </Text>
-          <Text style={[styles.label, { color: colors.secondary }]}>
-            Computer Science
-          </Text>
-        </View>
-
-        <View style={styles.field}>
-          <Text
-            style={[
-              styles.label,
-              { fontWeight: "bold", color: colors.primary },
-            ]}
-          >
-            UNIVERSITY
-          </Text>
-          <Text style={[styles.label, { color: colors.secondary }]}>
-            Khon Kaen University
-          </Text>
-        </View>
-
-        <View style={styles.field}>
-          <Text
-            style={[
-              styles.label,
-              { fontWeight: "bold", color: colors.primary },
-            ]}
-          >
-            SKILLS
-          </Text>
-          <Text
-            style={[styles.label, { marginBottom: 0, color: colors.secondary }]}
-          >
-            I'm really good at problem-solving
-          </Text>
-          <Text style={[styles.label, { color: colors.secondary }]}>
-            I enjoy puzzles, strategy games, and thinking things through.
-          </Text>
-        </View>
-        <View style={[styles.divider, { backgroundColor: colors.primary }]} />
-
-        {/* <View style={styles.fieldSocial}>
+        <View
+          style={[styles.buttonContainer, { backgroundColor: colors.primary }]}
+        >
           <TouchableOpacity
-            onPress={() =>
-              Linking.openURL("https://www.facebook.com/haroonsiddiqqureshi")
-            }
+            onPress={() => {
+              router.push("/profile");
+            }}
           >
-            <FontAwesome
-              name="facebook-square"
-              size={40}
-              color={colors.secondary}
-            />
+            <Text style={[styles.label, { fontWeight: "bold", color: "#fff" }]}>
+              Go to Profile Page
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL("https://www.instagram.com/h_harxxn/")
-            }
-          >
-            <FontAwesome name="instagram" size={40} color={colors.secondary} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL("https://github.com/haroonsiddiqqureshi")
-            }
-          >
-            <FontAwesome name="github" size={40} color={colors.secondary} />
-          </TouchableOpacity>
-        </View> */}
+        </View>
+
+        <View style={[styles.divider, { backgroundColor: colors.border }]} />
 
         <View
-          style={[
-            styles.buttonContainer,
-            {
-              backgroundColor: colors.primary,
-              marginBottom: 10,
-            },
-          ]}
+          style={[styles.buttonContainer, { backgroundColor: colors.primary }]}
         >
           <TouchableOpacity
             onPress={() => {
@@ -156,11 +54,10 @@ const Home = () => {
           </TouchableOpacity>
         </View>
 
+        <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
         <View
-          style={[
-            styles.buttonContainer,
-            { backgroundColor: colors.primary },
-          ]}
+          style={[styles.buttonContainer, { backgroundColor: colors.primary }]}
         >
           <TouchableOpacity
             onPress={() => {
@@ -195,10 +92,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   divider: {
-    width: "80%",
-    height: 1,
-    opacity: 0.2,
-    marginVertical: 20,
+    width: "20%",
+    height: 2,
+    marginVertical: 10,
   },
   field: {
     width: "75%",
@@ -207,13 +103,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
   },
-  // fieldSocial: {
-  //   width: "75%",
-  //   height: "auto",
-  //   flexDirection: "row",
-  //   justifyContent: "space-between",
-  //   paddingHorizontal: 40,
-  // },
   buttonContainer: {
     width: "80%",
     height: 30,

@@ -22,6 +22,18 @@ function StackLayout() {
         <Stack.Screen
           name="index"
           options={{
+            title: "Home",
+            headerRight: () => (
+              <>
+                <ThemeToggle />
+                <SignIn />
+              </>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="profile"
+          options={{
             title: "Profile",
             headerRight: () => (
               <>
@@ -55,21 +67,36 @@ function StackLayout() {
           name="book/book"
           options={{
             title: "Book List",
-            headerRight: () => <ThemeToggle />,
+            headerRight: () => (
+              <>
+                <ThemeToggle />
+                <SignIn />
+              </>
+            ),
           }}
         />
         <Stack.Screen
           name="book/create"
           options={{
-            title: "Add Book",
-            headerRight: () => <ThemeToggle />,
+            title: "Create Book",
+            headerRight: () => (
+              <>
+                <ThemeToggle />
+                <SignIn />
+              </>
+            ),
           }}
         />
         <Stack.Screen
           name="book/[id]"
           options={{
-            title: "Book Details",
-            headerRight: () => <ThemeToggle />,
+            title: "Book Detail",
+            headerRight: () => (
+              <>
+                <ThemeToggle />
+                <SignIn />
+              </>
+            ),
           }}
         />
       </Stack>
